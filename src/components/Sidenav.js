@@ -1,10 +1,11 @@
 import React from 'react'
-import { Segment, Menu, Radio, Input, Divider, Header } from 'semantic-ui-react'
+import { Segment, Menu, Radio, Input, Header } from 'semantic-ui-react'
+
 
 class Sidenav extends React.Component {
   render () {
     return(
-      <Menu vertical basic>
+      <Menu vertical>
         <Menu.Item>
           <Menu.Header>Filter By Price</Menu.Header>
           <Input min={1} max={500} type='range' value='temp' />

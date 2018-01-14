@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Navbar from './components/Navbar'
-import Women from './components/Women'
-import Men from './components/Men'
-import Sale from './components/Sale'
-import NoMatch from './components/NoMatch'
-import Home from './components/Home'
-import Sidenav from './components/Sidenav'
-import Banner from './components/Banner'
+import Navbar from './Navbar'
+import Women from './Women'
+import Men from './Men'
+import Sale from './Sale'
+import NoMatch from './NoMatch'
+import Home from './Home'
+import Sidenav from './Sidenav'
+import Banner from './Banner'
 import { Segment, Grid } from 'semantic-ui-react'
+import styled from 'styled-components';
+
+
 
 class App extends Component {
 
@@ -31,20 +34,20 @@ class App extends Component {
         <Navbar />
         <Segment basic className='container'>
 
-            <Grid>
+            <Grid verticalAlign='top'>
               <Grid.Row>
                 <Grid.Column width={16}>
                   <Banner />
                 </Grid.Column>
               </Grid.Row>
-              <Grid.Row>
-                <Grid.Column width={6}>
+                <Grid.Column width={3}>
                   <Sidenav />
                 </Grid.Column>
-                <Grid.Column width={10}>
+                <Grid.Column width={13} centered columns='three'>
+                  <Grid.Row width={4}>
                     {this.storePaths()}
+                  </Grid.Row>
                 </Grid.Column>
-              </Grid.Row>
             </Grid>
 
 

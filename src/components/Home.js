@@ -1,26 +1,48 @@
 import React from 'react'
-import { Segment } from 'semantic-ui-react'
-import axios from 'axios'
+import { Segment, Card,Grid } from 'semantic-ui-react'
+import { getProducts } from '../actions/products'
+import { connect } from 'react-redux'
+import Product from './product'
+import styled from 'styled-components';
 
+const CardContainer = styled.div`
+  margin-left: 1rem !important;
+`
 class Home extends React.Component {
+  state = { loaded: false }
 
   componentDidMount(){
-    const BASE_URL = 'http://api.sierratradingpost.com/api/1.0'
-    const KEY = '7917bf23fb8c9ab084cbb0134a3c0134'
-    axios.get(`${BASE_URL}/products/?api_key=${KEY}`)
-      .then( res => {
-        debugger
-        console.log(res.data)
-      })
+    this.props.dispatch(getProducts(this.apiCallback))
+  }
+
+  apiCallback = () => {
+    this.setState({ loaded: !this.state.loaded})
+  }
+
+  mapProducts = () => {
+    return this.props.products.map( item => {
+      return (
+        <Grid.Row>
+          <Product key={item.Id} {...item} />
+        </Grid.Row>
+      );
+    });
   }
 
   render () {
+    const { loaded } = this.state
     return(
-      <Segment basic>
-        Home
-      </Segment>
+      <Card.Group as={CardContainer}>
+        { loaded && this.mapProducts()}
+      </Card.Group>
     )
   }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+  return {
+    products: state.products
+  }
+}
+
+export default connect(mapStateToProps)(Home);
