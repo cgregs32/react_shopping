@@ -1,19 +1,45 @@
 import React from 'react'
-import { Segment, Menu, Radio, Input, Header } from 'semantic-ui-react'
+import { Segment, Menu, Radio, Input, Header, Label } from 'semantic-ui-react'
+import styled from 'styled-components';
 
+const headerStyle = styled.div`
+  display: inline !important;
+`
 
 class Sidenav extends React.Component {
+  state = { duration: 250, sale: false }
+
+
+  handleChange = (e, { name, value }) => this.setState({ [name]: value })
+
+  hendleToggle = () => {
+    this.props.dispatch({ type: 'ADD_SEARCH_FILTER', visible: !this.state.sale})
+  }
+
   render () {
+    const { duration } = this.state
+
     return(
       <Menu vertical>
         <Menu.Item>
-          <Menu.Header>Filter By Price</Menu.Header>
-          <Input min={1} max={500} type='range' value='temp' />
+          <Header as='h4' textAlign='center'>Highest Price: ${duration}</Header>
+            <Input
+              min={1.00}
+              max={500.00}
+              name='duration'
+              onChange={this.handleChange}
+              step={0.1}
+              type='range'
+              value={duration}
+            />
         </Menu.Item>
         <Menu.Item>
           <Menu.Header>Sale Items</Menu.Header>
           <Segment compact>
-            <Radio toggle />
+            <Radio
+              toggle
+              onChange={this.handleToggle}
+            />
           </Segment>
         </Menu.Item>
         <Menu.Item>

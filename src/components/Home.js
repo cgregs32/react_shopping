@@ -5,14 +5,20 @@ import { connect } from 'react-redux'
 import Product from './product'
 import styled from 'styled-components';
 
+
 const CardContainer = styled.div`
   margin-left: 1rem !important;
 `
 class Home extends React.Component {
-  state = { loaded: false }
+  state = { loaded: false, category: '', sale: false }
 
   componentDidMount(){
-    this.props.dispatch(getProducts(this.apiCallback))
+    const { dispatch, location} = this.props
+    dispatch(getProducts(this.apiCallback))
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    this.setState({category: nextProps.location.pathname.slice(1)})
   }
 
   apiCallback = () => {
@@ -20,28 +26,49 @@ class Home extends React.Component {
   }
 
   mapProducts = () => {
-    return this.props.products.map( item => {
+    const { products } = this.props;
+    const { category } = this.state;
+
+    let visible = products;
+    const keyWord = category.substr(0, 1).toUpperCase() + category.substr(1);
+    switch(category ){
+      case 'sale':
+        visible = this.props.products.filter( p => p.Reviews.AverageRating < 4.2 )
+        break;
+      case 'women':
+      case 'men':
+        visible = this.props.products.filter( p => p.Name.includes(keyWord))
+        break;
+      default:
+        visible
+    }
+    return visible.map( item => {
       return (
-        <Grid.Row>
-          <Product key={item.Id} {...item} />
-        </Grid.Row>
+        <Grid.Column key={item.Id}>
+          <Product {...item} />
+        </Grid.Column>
       );
     });
   }
 
+  displayVisible = (visible) => {
+  }
+
+// this.props.match.path.slice(1)
   render () {
     const { loaded } = this.state
     return(
-      <Card.Group as={CardContainer}>
+      <Grid columns={3}>
         { loaded && this.mapProducts()}
-      </Card.Group>
+      </Grid>
     )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    products: state.products
+    products: state.products,
+    currentPath: state.searchProps
   }
 }
 

@@ -1,11 +1,15 @@
 import React from 'react'
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Card, Icon, Image, Label, Button } from 'semantic-ui-react'
 import styled from 'styled-components';
 
 
 const EachCard = styled.div`
   margin: 5px !important;
   justify-content: space-between;
+`
+const ButtonStyle = styled.button`
+  width: 40% !important;
+  margin: 15px auto 25px auto !important;
 `
 
 class Product extends React.Component {
@@ -15,18 +19,12 @@ class Product extends React.Component {
       <Card as={EachCard} >
         <Card.Content>
           <Card.Header>{item.Name}</Card.Header>
+          { item.Reviews.AverageRating < 4.2 && <Label as='a' color='red' ribbon='right'>Sale</Label> }
         </Card.Content>
         <Image src={item.Images.PrimaryExtraLarge} />
-        <Card.Content>
-          <Card.Meta>Joined in 2016</Card.Meta>
-          <Card.Description>Daniel is a comedian living in Nashville.</Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-          <a>
-            <Icon name='user' />
-            10 Friends
-          </a>
-        </Card.Content>
+
+        <Card.Description as='h3' textAlign='center'>${item.SuggestedRetailPrice}</Card.Description>
+        <Button as={ButtonStyle} color='teal'>Add Item</Button>
       </Card>
     )
   }

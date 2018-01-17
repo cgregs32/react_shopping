@@ -11,14 +11,14 @@ export const getProducts = (cb = {}) => {
     axios.jsonp(`${BASE_URL}`, {
         params: {
           api_key: KEY,
-          perpage: 10
+          perpage: 9
         }
       })
       .then(res => {
         console.log(res.Result);
         dispatch({type: 'GET_PRODUCTS', products: res.Result})
+        cb()
       })
-      .then( cb() )
       .catch(err => {
         dispatch(setFlash('Could not retreive your products', 'Error'))
       })
