@@ -1,8 +1,8 @@
-const searchProps = (state = {}, action) => {
+const searchProps = (state = false, action) => {
   console.log(action.type)
   switch(action.type){
     case 'ADD_SEARCH_FILTER':
-      return action.sale
+      return action.visible
     default:
       return state
   }

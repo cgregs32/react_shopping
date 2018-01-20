@@ -1,23 +1,28 @@
 import React from 'react'
 import { Segment, Menu, Radio, Input, Header, Label } from 'semantic-ui-react'
 import styled from 'styled-components';
+import { connect } from 'react-redux'
+
 
 const headerStyle = styled.div`
   display: inline !important;
 `
 
 class Sidenav extends React.Component {
-  state = { duration: 250, sale: false }
+  state = { duration: 200, sale: false }
 
 
-  handleChange = (e, { name, value }) => this.setState({ [name]: value })
+  handleChange = (e, { name, value }) => {
+    this.setState({ [name]: value })
+    this.props.dispatch({ type: 'SET_COST_FILTER', cost: this.state.duration  })
+  }
 
-  hendleToggle = () => {
-    this.props.dispatch({ type: 'ADD_SEARCH_FILTER', visible: !this.state.sale})
+  handleToggle = () => {
+    this.props.dispatch({ type: 'ADD_SEARCH_FILTER', visible: !this.props.filter})
   }
 
   render () {
-    const { duration } = this.state
+    const { duration, sale } = this.state
 
     return(
       <Menu vertical>
@@ -25,7 +30,7 @@ class Sidenav extends React.Component {
           <Header as='h4' textAlign='center'>Highest Price: ${duration}</Header>
             <Input
               min={1.00}
-              max={500.00}
+              max={300.00}
               name='duration'
               onChange={this.handleChange}
               step={0.1}
@@ -39,6 +44,7 @@ class Sidenav extends React.Component {
             <Radio
               toggle
               onChange={this.handleToggle}
+              checked={this.props.filter}
             />
           </Segment>
         </Menu.Item>
@@ -56,4 +62,10 @@ class Sidenav extends React.Component {
   }
 }
 
-export default Sidenav;
+const mapStateToProps = (state) => {
+  return {
+    filter: state.searchProps
+  }
+}
+
+export default connect(mapStateToProps)(Sidenav);

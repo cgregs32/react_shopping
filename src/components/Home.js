@@ -9,6 +9,12 @@ import styled from 'styled-components';
 const CardContainer = styled.div`
   margin-left: 1rem !important;
 `
+const cardColumn = styled.div`
+  height: 330px !important;
+  padding-right: 2px  !important;
+  padding-bottom: 0  !important;
+`
+
 class Home extends React.Component {
   state = { loaded: false, category: '', sale: false }
 
@@ -18,6 +24,7 @@ class Home extends React.Component {
   }
 
   componentWillReceiveProps = (nextProps) => {
+    // this.props.dispatch({type: 'SET_PATH' path: nextProps.location.pathname.slice(1)})
     this.setState({category: nextProps.location.pathname.slice(1)})
   }
 
@@ -25,26 +32,38 @@ class Home extends React.Component {
     this.setState({ loaded: !this.state.loaded})
   }
 
-  mapProducts = () => {
-    const { products } = this.props;
-    const { category } = this.state;
+  filterProducts = () => {
 
+  }
+
+  filterSale = () => {
+
+  }
+
+  mapProducts = () => {
+    const { products, filter, cost } = this.props;
+    const { category } = this.state;
     let visible = products;
     const keyWord = category.substr(0, 1).toUpperCase() + category.substr(1);
     switch(category ){
       case 'sale':
-        visible = this.props.products.filter( p => p.Reviews.AverageRating < 4.2 )
+        visible = products.filter( p => p.Reviews.AverageRating < 4.2 )
         break;
       case 'women':
       case 'men':
-        visible = this.props.products.filter( p => p.Name.includes(keyWord))
+        visible = products.filter( p => p.Name.includes(keyWord))
         break;
       default:
         visible
     }
+    if(filter === true){
+      visible = visible.filter( p => p.Reviews.AverageRating < 4.2 )
+    }
+    if(cost)
+      visible = visible.filter( p => p.SuggestedRetailPrice < cost)
     return visible.map( item => {
       return (
-        <Grid.Column key={item.Id}>
+        <Grid.Column as={cardColumn} key={item.Id}>
           <Product {...item} />
         </Grid.Column>
       );
@@ -68,7 +87,8 @@ class Home extends React.Component {
 const mapStateToProps = (state) => {
   return {
     products: state.products,
-    currentPath: state.searchProps
+    filter: state.searchProps,
+    cost: state.costFilter
   }
 }
 
