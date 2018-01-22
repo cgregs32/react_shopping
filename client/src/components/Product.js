@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Icon, Image, Label, Button } from 'semantic-ui-react'
+import { Card, Image, Label, Button } from 'semantic-ui-react'
 import styled from 'styled-components';
 import { connect } from 'react-redux'
 

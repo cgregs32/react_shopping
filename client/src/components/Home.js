@@ -1,14 +1,10 @@
 import React from 'react'
-import { Segment, Card,Grid } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 import { getProducts } from '../actions/products'
 import { connect } from 'react-redux'
-import Product from './product'
+import Product from './Product'
 import styled from 'styled-components';
 
-
-const CardContainer = styled.div`
-  margin-left: 1rem !important;
-`
 const cardColumn = styled.div`
   height: 330px !important;
   padding-right: 2px  !important;
@@ -19,7 +15,7 @@ class Home extends React.Component {
   state = { loaded: false, category: '', sale: false }
 
   componentDidMount(){
-    const { dispatch, location} = this.props
+    const { dispatch } = this.props
     dispatch(getProducts(this.apiCallback))
   }
 

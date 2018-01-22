@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Navbar from './Navbar'
-import Women from './Women'
-import Men from './Men'
-import Sale from './Sale'
 import NoMatch from './NoMatch'
 import Home from './Home'
 import Sidenav from './Sidenav'
@@ -14,19 +11,8 @@ import styled from 'styled-components';
 import SearchProps from './SearchProps'
 import { withRouter } from 'react-router'
 
-
-
-const BackgroundStyle = styled.div`
-  color: blue;
-  background-color: #A0CFD3 !important;
-  height: 100vh !important;
-`
 const BannerStyle = styled.div`
   padding-right: 0 !important;
-`
-const AppBackground = styled.div`
-  background-color: #A0CFD3 !important;
-  height: 100vh !important;
 `
 
 const styles = {
@@ -35,6 +21,7 @@ const styles = {
     minHeight: '100%'
   }
 }
+
 class App extends Component {
 
   storePaths(){

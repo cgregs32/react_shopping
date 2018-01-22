@@ -6,9 +6,6 @@ import { connect } from 'react-redux'
 const Container = styled.div`
   text-align: center
 `
-const CartItem = styled.div`
-
-`
 
 class Cart extends React.Component {
 
@@ -34,7 +31,7 @@ class Cart extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { store: state.store}
+  return { store: state.store }
 }
 
-export default Cart;
+export default connect(mapStateToProps)(Cart);

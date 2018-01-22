@@ -25,13 +25,13 @@ class Navbar extends React.Component {
     return (
       <div>
         <Menu attatched='top' as={NavStyle}>
-          <Menu.Menu position='left' basic>
+          <Menu.Menu position='left'>
             <Menu.Item as={Link} to='/' active={this.activeItem('/')}>
               <Icon name='home' style={{ fontSize: '28px'}}/>
             </Menu.Item>
           </Menu.Menu>
 
-          <Menu.Menu position='center'>
+          <Menu.Menu position='left'>
             <Menu.Item as={Link} to='/women' active={this.activeItem('/home')}>
               Women
             </Menu.Item>

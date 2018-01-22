@@ -1,12 +1,6 @@
 import React from 'react'
-import { Segment, Menu, Radio, Input, Header, Label } from 'semantic-ui-react'
-import styled from 'styled-components';
+import { Segment, Menu, Radio, Input, Header } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-
-
-const headerStyle = styled.div`
-  display: inline !important;
-`
 
 class Sidenav extends React.Component {
   state = { duration: 200, sale: false }
@@ -22,7 +16,7 @@ class Sidenav extends React.Component {
   }
 
   render () {
-    const { duration, sale } = this.state
+    const { duration } = this.state
 
     return(
       <Menu vertical>
