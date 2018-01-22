@@ -49,8 +49,6 @@ class Home extends React.Component {
       case 'men':
         visible = products.filter( p => p.Name.includes(keyWord))
         break;
-      default:
-        visible
     }
     if(filter === true){
       visible = visible.filter( p => p.Reviews.AverageRating < 4.2 )

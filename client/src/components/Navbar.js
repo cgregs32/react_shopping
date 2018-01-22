@@ -6,7 +6,6 @@ import { Icon, Label } from 'semantic-ui-react'
 import styled from 'styled-components';
 import { connect } from 'react-redux'
 
-
 const NavStyle = styled.div`
   height: 65px;
   padding: 0 85px !important;

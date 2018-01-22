@@ -20,7 +20,7 @@ const header = styled.div`
   padding-bottom: 0 !important;
 `
 
-const cardImage = styled.image`
+const cardImage = styled(Image)`
   margin: 0 auto;
 `
 
