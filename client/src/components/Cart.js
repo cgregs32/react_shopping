@@ -3,6 +3,7 @@ import { Segment, Header, Grid, Image, Button } from 'semantic-ui-react'
 import styled from 'styled-components';
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import Checkout from './checkout/Checkout'
 
 const Container = styled.div`
   text-align: center
@@ -82,6 +83,7 @@ class Cart extends React.Component {
 
   render () {
     const { cart } = this.props
+    const total = cart.reduce( (total, item) => item.SuggestedRetailPrice + total, 0)
     return(
       <Segment as={Container}>
         <Header as='h1'>
@@ -89,6 +91,7 @@ class Cart extends React.Component {
         </Header>
         { cart.length !== 0 ? this.handleMultiples(cart) : this.cartIsEmpty()}
         { cart.length !== 0 && this.cartTotal()}
+        { cart.length !== 0 && <Checkout total={total}/> }
       </Segment>
     )
   }

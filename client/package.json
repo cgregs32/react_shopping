@@ -6,6 +6,8 @@
   "dependencies": {
     "axios": "^0.17.1",
     "axios-jsonp-pro": "^1.0.1",
+    "braintree-dropin-react": "^0.1.0",
+    "braintree-web-drop-in": "^1.9.2",
     "dotenv": "^4.0.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

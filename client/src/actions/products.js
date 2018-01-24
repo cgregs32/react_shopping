@@ -7,7 +7,7 @@ export const getProducts = (cb = {}) => {
     const BASE_URL = 'http://api.sierratradingpost.com/api/1.0/products/search~chacco/'
     axios.jsonp(`${BASE_URL}`, {
         params: {
-          api_key: process.env.REACT_APP_API_KEY,
+          api_key: process.env.REACT_APP_API_KEY_SIERRA_TP,
           perpage: 9
         }
       })
