@@ -83,7 +83,7 @@ class BraintreeDrop extends React.Component {
 
 
 // if loaded ?  braintree : loader
-//remove fakeToken
+//remove fakeToken please
   render() {
     const { loaded, token, redirect, transactionId } = this.state;
     const fakeToken = 'ajhk21kg32hg1adsa2'
